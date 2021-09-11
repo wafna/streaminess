@@ -10,7 +10,7 @@ import scala.util.{Failure, Success}
 object Systematizer {
   def apply(f: ActorSystem[NotUsed] => Future[Any]): Unit = {
     implicit val system: ActorSystem[NotUsed] =
-      ActorSystem(Behaviors.empty[NotUsed], "QuickStart")
+      ActorSystem(Behaviors.empty[NotUsed], "streaminess")
     implicit val executionContext: ExecutionContext = system.executionContext
     f(system).onComplete { t =>
       system.terminate()
