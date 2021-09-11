@@ -1,2 +1,3 @@
 # streaminess
-akka streams
+
+Fun with akka streams.
