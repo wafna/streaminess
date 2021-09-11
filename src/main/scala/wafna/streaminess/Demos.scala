@@ -1,34 +1,15 @@
 package wafna.streaminess
 
-import scala.concurrent._
-import scala.concurrent.duration._
-import java.nio.file.Paths
-import akka.stream._
-import akka.stream.scaladsl._
-import akka.{Done, NotUsed}
+import akka.NotUsed
 import akka.actor.typed.ActorSystem
 import akka.actor.typed.scaladsl.Behaviors
+import akka.stream._
+import akka.stream.scaladsl._
 import akka.util.ByteString
 
-import scala.concurrent._
-import scala.concurrent.duration._
 import java.nio.file.Paths
+import scala.concurrent._
 import scala.util.{Failure, Success}
-
-object Systematizer {
-  def apply(f: ActorSystem[NotUsed] => Future[Any]): Unit = {
-    implicit val system: ActorSystem[NotUsed] =
-      ActorSystem(Behaviors.empty[NotUsed], "QuickStart")
-    implicit val executionContext: ExecutionContext = system.executionContext
-    f(system).onComplete { t =>
-      system.terminate()
-      t match {
-        case Success(r) => println(r)
-        case Failure(e) => println(s"ERROR: ${e.getMessage}")
-      }
-    }
-  }
-}
 
 object Demo1 extends App {
   Systematizer { implicit system =>
